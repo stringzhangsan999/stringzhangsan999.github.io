@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"47.111.239.85","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="版本控制工具(linux命令在其中 git bash 同样适用 )">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git基本命令操作">
+<meta property="og:url" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="跑起来有风">
+<meta property="og:description" content="版本控制工具(linux命令在其中 git bash 同样适用 )">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg">
+<meta property="article:published_time" content="2020-08-19T02:40:35.000Z">
+<meta property="article:modified_time" content="2020-08-19T06:37:36.483Z">
+<meta property="article:author" content="小希希">
+<meta property="article:tag" content="git基本命令操作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
+
+
+<link rel="canonical" href="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git基本命令操作 | 跑起来有风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">跑起来有风</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="categories fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">git基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">git初始化仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%9D%A5%E5%AD%98%E6%94%BE%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">用来存放数据的仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%93%E5%BA%93%E7%AD%BE%E5%90%8D"><span class="nav-number">1.2.</span> <span class="nav-text">设置仓库签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%93%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">查看仓库状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%9A%82%E5%AD%98%E5%8C%BA%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">在暂存区中添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E5%88%B0%E4%BB%93%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">提交文件到仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">更新文件内容文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">大致的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">1.7.1.</span> <span class="nav-text">reset 命令的三个参数的对比</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小希希"
+      src="/images/boniu.jpg">
+  <p class="site-author-name" itemprop="name">小希希</p>
+  <div class="site-description" itemprop="description">生活原本沉闷，跑起来就会有风</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/boniu.jpg">
+      <meta itemprop="name" content="小希希">
+      <meta itemprop="description" content="生活原本沉闷，跑起来就会有风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="跑起来有风">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git基本命令操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-19 10:40:35 / 修改时间：14:37:36" itemprop="dateCreated datePublished" datetime="2020-08-19T10:40:35+08:00">2020-08-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">版本控制工具(linux命令在其中 git bash 同样适用 )</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="git基本操作"><a href="#git基本操作" class="headerlink" title="git基本操作"></a>git基本操作</h1><h2 id="git初始化仓库"><a href="#git初始化仓库" class="headerlink" title="git初始化仓库"></a>git初始化仓库</h2><h3 id="用来存放数据的仓库"><a href="#用来存放数据的仓库" class="headerlink" title="用来存放数据的仓库"></a>用来存放数据的仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init #初始化仓库会创建 .git文件夹</span><br><span class="line">git init [指定文件夹] #在指定文件夹里面初始化仓库</span><br></pre></td></tr></table></figure>
+
+<p>如图：</p>
+
+
+<hr>
+<h2 id="设置仓库签名"><a href="#设置仓库签名" class="headerlink" title="设置仓库签名"></a>设置仓库签名</h2><p><strong>区分开发人员身份</strong></p>
+<p><strong>注意这里</strong> ：设置签名跟远程库(代码托管中心Github)的账号密码没有任何关系</p>
+<p><strong>形式：</strong> </p>
+<ul>
+<li>用户名： “tom”</li>
+<li>email :    “<a href="mailto:&#x78;&#x78;&#x78;&#120;&#x40;&#120;&#120;&#x2e;&#99;&#111;&#109;">&#x78;&#x78;&#x78;&#120;&#x40;&#120;&#120;&#x2e;&#99;&#111;&#109;</a>”</li>
+</ul>
+<p><strong>级别：</strong></p>
+<ul>
+<li><p>项目级别（仓库级别）：仅仅在当前本地库范围内有效</p>
+<ul>
+<li>git config  user.name tom_pro</li>
+<li>git config  user.eamil  <a href="mailto:&#120;&#120;&#x78;&#120;&#x78;&#x40;&#120;&#120;&#x78;&#46;&#x63;&#111;&#x6d;">&#120;&#120;&#x78;&#120;&#x78;&#x40;&#120;&#120;&#x78;&#46;&#x63;&#111;&#x6d;</a></li>
+</ul>
+</li>
+<li><p>系统用户级别： 登录当前操作系统的用户范围</p>
+<ul>
+<li><p>git config <strong>–global</strong>   user.name tom_pro</p>
+</li>
+<li><p>git config <strong>–global</strong>   user.eamil  <a href="mailto:&#120;&#120;&#120;&#120;&#x78;&#x40;&#120;&#120;&#120;&#46;&#99;&#111;&#x6d;">&#120;&#120;&#120;&#120;&#x78;&#x40;&#120;&#120;&#120;&#46;&#99;&#111;&#x6d;</a></p>
+</li>
+<li><p>就进原则：如果项目级别和系统用户级别都设置了有先使用项目级别，如果只设置了系统级别那么就用系统级别</p>
+</li>
+<li><p>二者都没有就不允许操作</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat  .git&#x2F;config #查看配置文件检查刚刚配置的签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>这个是项目级别的：</p>
+ <img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg" class title="查看项目级别签名">   
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .gitconfig# 查看全局配置文件里面的系统用户级别签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>这个是系统级别的：</p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg" class title="查看系统级别签名">
+
+<hr>
+<h2 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h2><p><code>git status #可以用来查看仓库中文件状态</code></p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg" class title="查看仓库状态">
+
+<hr>
+<h2 id="在暂存区中添加文件"><a href="#在暂存区中添加文件" class="headerlink" title="在暂存区中添加文件"></a>在暂存区中添加文件</h2><p><strong>我们可以创建一个a.txt文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add a.txt #将a.txt文件添加到暂存区 但是只是放到了暂存区</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交之后的状态使用git status查看</strong></p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg" class title="添加文件后的状态">
+
+
+
+
+
+<p><strong>我们可以将暂存区的文件给撤销提交状态</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm  --cached a.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>撤销后查看状态</strong></p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg" class title="撤销文件后的状态">
+
+<hr>
+<h2 id="提交文件到仓库"><a href="#提交文件到仓库" class="headerlink" title="提交文件到仓库"></a>提交文件到仓库</h2><p>**注意：我们要提交一个文件前应该先添加到暂存区 **</p>
+<p><strong>注意：如果你没有描述文件信息message</strong> </p>
+<p>那 么会进入到vim编辑器里面 使用 <code>set nu</code>可以查看行号</p>
+<p>我们可以在第一行添加message 也可以直接wq退出 </p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg" class title="提交文件时出现vim编辑器">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit  [ -m &quot;message&quot;]  a.txt  #提交文件到仓库中</span><br></pre></td></tr></table></figure>
+
+<p>再次查看状态可以发现提示信息显示没有可提交的文件</p>
+<hr>
+<h2 id="更新文件内容文件"><a href="#更新文件内容文件" class="headerlink" title="更新文件内容文件"></a>更新文件内容文件</h2><p><strong>我们修改a.txt的内容后再次查看状态</strong></p>
+
+
+<p>  <strong>可以注意到我们可以下面提示我们可以add or commit 也就是我们可以直接提交，但是如果你直接commit修改的文件没有放到暂存区当你查看状态时会发现这个时候还是会有提示提示你！</strong></p>
+<p>  <strong>所以我们可以按照刚刚提交文件的方式先add再commit这样就不会提示你！</strong></p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg" class title="提交修改后的文件">
+
+
+
+<hr>
+<h2 id="大致的流程"><a href="#大致的流程" class="headerlink" title="大致的流程"></a>大致的流程</h2><img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg" class title="流程图} --- ## 查看日志 &lt;figure class&#x3D;highlight plain&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;gutter&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;code&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;git log #查看日志会显示之前的操作和版本号,最完整 （空格翻页）&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --pretty&#x3D;oneline #日志按照一条一条显示，完整的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --oneline #显示部分的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git reflog #部分hashcode还包含HEAD@&amp;#123;恢复这个版本需要多少步&amp;#125;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt; {%asset_img log01.jpg git_log01} {%asset_img log02.jpg git_log02} {%asset_img log03.jpg git_log03} {%asset_img log04.jpg git_reflog} --- ## 版本前进后退 **本质：通过一个指针进行前进后退** **三种方式：** + 基于索引值操作【推荐】 ​ {%asset_img reset01.jpg 基于索引值">
+
+<ul>
+<li><p>使用^符号（只能后退不能前进）</p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于^">
+</li>
+<li><p>使用~符号（只能后退不能前进）</p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于~">
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 索引值 #部分hashcod(部分索引值)</span><br><span class="line">git reset --hard HEAD^ #^回退一下 ^^回退两下</span><br><span class="line">git reset --hard HEAD~N #回退N步</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="reset-命令的三个参数的对比"><a href="#reset-命令的三个参数的对比" class="headerlink" title="reset 命令的三个参数的对比"></a>reset 命令的三个参数的对比</h3><ul>
+<li><p>–soft 参数(了解)</p>
+<ul>
+<li>仅仅在本地库移动head指针</li>
+</ul>
+<p>实际上就是只有本地库改变了</p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg" class title="soft">
+</li>
+<li><p>–mixed参数（了解）</p>
+<ul>
+<li>在本地库移动head指针</li>
+<li>重置缓存区</li>
+</ul>
+<p>本地库和暂存区都发生了改变</p>
+<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg" class title="mixed">
+</li>
+<li><p>–hard参数（常用的是hard）</p>
+<ul>
+<li>在本地库移动head指针</li>
+<li>重置缓存区</li>
+<li>重置工作区</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" rel="tag"># git基本命令操作</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/18/%E5%9B%9B%E7%BA%A7%E5%86%99%E4%BD%9C%E5%8A%9F%E8%83%BD%E5%8F%A5/" rel="prev" title="四级写作功能句">
+                  <i class="fa fa-chevron-left"></i> 四级写作功能句
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小希希</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: location.pathname,
+    }, {"enable":true,"appId":"lghYz9hG5HnqKEUPx5q91zkr-gzGzoHsz","appKey":"jTr0bTOHq1DMGmFpuKkFcHzM","placeholder":"快来评论吧(*^▽^*)！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
