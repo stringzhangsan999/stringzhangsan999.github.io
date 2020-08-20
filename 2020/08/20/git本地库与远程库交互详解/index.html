@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"47.111.239.85","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="git本地库和远程库进行数据交互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git本地库与远程库交互详解">
+<meta property="og:url" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="跑起来有风">
+<meta property="og:description" content="git本地库和远程库进行数据交互">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/address_alias.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/identify.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/fetch01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/checkout01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/pull01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/conflict01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/resolve_conflict.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/resolve_conflict02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/pullrequest.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH03.jpg">
+<meta property="article:published_time" content="2020-08-20T05:46:57.000Z">
+<meta property="article:modified_time" content="2020-08-20T09:09:32.933Z">
+<meta property="article:author" content="小希希">
+<meta property="article:tag" content="git本地库与远程库交互">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/address_alias.jpg">
+
+
+<link rel="canonical" href="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git本地库与远程库交互详解 | 跑起来有风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">跑起来有风</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="categories fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92"><span class="nav-number">1.</span> <span class="nav-text">本地库和远程库交互</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%BA%93%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">本地库的准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">推送代码到远程库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="nav-number">1.3.</span> <span class="nav-text">下载代码到本地库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%80%E8%AF%B7%E6%88%90%E5%91%98%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91"><span class="nav-number">1.5.</span> <span class="nav-text">邀请成员协同开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%BF%AE%E6%94%B9%E7%9A%84%E6%8B%89%E5%8F%96"><span class="nav-number">1.6.</span> <span class="nav-text">远程仓库修改的拉取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%E5%87%BA%E7%8E%B0%E7%9A%84%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3"><span class="nav-number">1.7.</span> <span class="nav-text">协同开发出现的冲突解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9B%A2%E9%98%9F%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%88github%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">跨团队操作流程（github）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E5%85%8D%E7%A7%98%E9%92%A5%E7%99%BB%E5%BD%95"><span class="nav-number">1.9.</span> <span class="nav-text">SSH免秘钥登录</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小希希"
+      src="/images/boniu.jpg">
+  <p class="site-author-name" itemprop="name">小希希</p>
+  <div class="site-description" itemprop="description">生活原本沉闷，跑起来就会有风</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://47.111.239.85/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/boniu.jpg">
+      <meta itemprop="name" content="小希希">
+      <meta itemprop="description" content="生活原本沉闷，跑起来就会有风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="跑起来有风">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git本地库与远程库交互详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-20 13:46:57 / 修改时间：17:09:32" itemprop="dateCreated datePublished" datetime="2020-08-20T13:46:57+08:00">2020-08-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">git本地库和远程库进行数据交互</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="本地库和远程库交互"><a href="#本地库和远程库交互" class="headerlink" title="本地库和远程库交互"></a>本地库和远程库交互</h1><h2 id="本地库的准备工作"><a href="#本地库的准备工作" class="headerlink" title="本地库的准备工作"></a>本地库的准备工作</h2><p><strong>准备步骤：</strong></p>
+<blockquote>
+<p>1.先初始化一下 仓库在需要上传的文件夹下进行 git init 操作</p>
+</blockquote>
+<blockquote>
+<p>2.我们之前在其他库里面设置了项目级别签名但是初始化的库里面没有签名</p>
+<p>我们可以执行：</p>
+<ul>
+<li><p>git config  user.name 用户名</p>
+</li>
+<li><p>git config  user.eamil  邮箱</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>3.准备好远程库 并准备远程库的连接地址 例如github库地址 <a target="_blank" rel="noopener" href="https://github.com/stringzhangsan999/test.git%E5%BD%93%E6%88%91%E4%BB%AC%E5%8E%BB%E5%A4%8D%E5%88%B6%E8%BF%9E%E6%8E%A5%E6%97%B6%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0HTTP%E8%BF%9E%E6%8E%A5%E5%92%8CSSH%E8%BF%9E%E6%8E%A5%E8%BF%99%E6%98%AF%E8%BF%9E%E6%8E%A5%E4%BB%93%E5%BA%93%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">https://github.com/stringzhangsan999/test.git当我们去复制连接时可以看到HTTP连接和SSH连接这是连接仓库的两种方式</a></p>
+</blockquote>
+<p><strong>我们准备好本地库和远程库之后可以进行下面的操作</strong>：</p>
+<blockquote>
+<p><strong>1.查看关联远程地址别名</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v  #查看远程仓库地址别名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>2.添加地址别名  （分HTTP地址连接和SSH地址连接 在代码上传下载那篇是SSH）</strong> github仓库创建时他自己默认的别名就是origin所以我们也可以取一样的避免记得太多   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add 地址别名 地址 </span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/address_alias.jpg" class title="设置地址别名">
+
+<blockquote>
+<p><strong>3.如果在此之前有了别名就要清除别名</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm 别名 #清除地址别名</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="推送代码到远程库"><a href="#推送代码到远程库" class="headerlink" title="推送代码到远程库"></a>推送代码到远程库</h2><blockquote>
+<p><strong>推送代码 推送代码时要保证本地库中有数据不然会报error: src refspec master does not match any</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push 地址别名 分支名</span><br></pre></td></tr></table></figure>
+
+<p>**注意：远程库如果不是空的需要先pull远程库中的内容把数据先下载到工作区才能进行push不然会报error: failed to push some refs to **</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase 地址别名 分支名 #远程库代码下载到本地库使用 --rebase会更好</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="下载代码到本地库"><a href="#下载代码到本地库" class="headerlink" title="下载代码到本地库"></a>下载代码到本地库</h2><blockquote>
+<p>将远程库的代码下载到本地库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程库地址  #将远程库的内容下载下来</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果：</strong></p>
+<ul>
+<li>完整把远程库下载到本地</li>
+<li>创建origin远程地址别名</li>
+<li>初始化本地库</li>
+</ul>
+<h2 id><a href="#" class="headerlink" title></a></h2><h2 id="邀请成员协同开发"><a href="#邀请成员协同开发" class="headerlink" title="邀请成员协同开发"></a>邀请成员协同开发</h2><p><strong>当你clone了远程的仓库之后如果你不是远程仓库的主人那么你是没有写的权限的</strong></p>
+<p><strong>注意这里我们只是聊github代码托管的情况</strong></p>
+<blockquote>
+<p>当你执行 git push origin master时输入密码，如果你不是仓库主人那么就需要仓库主人邀请你协同开发</p>
+</blockquote>
+<p><strong>因为我们这里没有两个账号那么就不演示了</strong></p>
+<blockquote>
+<p>  如果你执行git push origin master 没有要你输入密码只能说是系统保存了 在控制面板下打开管理凭证就会看到</p>
+</blockquote>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/identify.jpg" class title="凭证">
+
+<hr>
+<h2 id="远程仓库修改的拉取"><a href="#远程仓库修改的拉取" class="headerlink" title="远程仓库修改的拉取"></a>远程仓库修改的拉取</h2><blockquote>
+<p>pull = fetch + merge</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git fetch 远程地址别名 远程分支名  #拉取远程库的内容到本地库但是工作区内容还没有改变</span><br><span class="line"></span><br><span class="line">git merge 远程地址别名&#x2F;远程分支名        #合并远程库的内容更新工作区内容</span><br><span class="line"></span><br><span class="line">git pull 远程地址别名 远程分支名              #先拉取在合并</span><br></pre></td></tr></table></figure>
+</blockquote>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/fetch01.jpg" class title="拉取">
+
+
+
+<p>最好两步分开来进行因为我们可以先查看文件的不同再决定要不要合并**</p>
+<p><strong>当我们fetch之后想要查看远程库拉取下来的内容</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout  远程地址别名&#x2F;远程分支名  #切换到远程拉取的库中</span><br><span class="line"></span><br><span class="line">git checkout 本地分支名  #切换回本地的库中</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/checkout01.jpg" class title="查看拉去内容">
+
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/pull01.jpg" class title="pull操作">
+
+<hr>
+<h2 id="协同开发出现的冲突解决"><a href="#协同开发出现的冲突解决" class="headerlink" title="协同开发出现的冲突解决"></a>协同开发出现的冲突解决</h2><blockquote>
+<p>假如小张修改了a文件 并且提交了而小刘也修改了a文件而且修改的是同一个地方</p>
+<p>小张先提交不会有任何问题，当小刘去进行 fetch + merge操作时会出现冲突</p>
+</blockquote>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/conflict01.jpg" class title="冲突">
+
+<p>解决冲突的步骤：</p>
+<ul>
+<li>修改满意的代码去掉git添加的特殊符号</li>
+<li>添加到缓存区</li>
+<li>commit解决冲突（不用加文件名）</li>
+</ul>
+<blockquote>
+<p>处理完冲突之后直接推送到远程仓库</p>
+<p><code>git push 远程地址别名 远程分支名</code></p>
+</blockquote>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/resolve_conflict.jpg" class title="解决冲突并推送">
+
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/resolve_conflict02.jpg" class title="查看远程库">
+
+<h2 id="跨团队操作流程（github）"><a href="#跨团队操作流程（github）" class="headerlink" title="跨团队操作流程（github）"></a>跨团队操作流程（github）</h2><p> <strong>场景：</strong>小张 和小刘协同开发一个项目但是小刘发现交给他的任务他不会，正好他想请做过这个事情的    小赵来帮忙但是小赵不是他们公司的人。</p>
+<p><strong>小赵想要帮忙必须：</strong></p>
+<ul>
+<li>【fork操作】fork项目到自己的账号下，相当于小赵有了整个项目并且这个项目一个被复制到他自己的远程库中所以他可以进行修改！</li>
+<li>修改好代码之后 pull request 发送合并审核给这个项目的主人</li>
+</ul>
+<p>​       <img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/pullrequest.jpg" class title="发送合并审核"></p>
+<ul>
+<li>小张是这个项目的主人那么点击pull request 将查看合并请求 查看修改的代码</li>
+<li>如果审核没错之后点解 Merge pull request合并代码</li>
+</ul>
+<p><strong>没有那么多账号没有演示</strong></p>
+<h2 id="SSH免秘钥登录"><a href="#SSH免秘钥登录" class="headerlink" title="SSH免秘钥登录"></a>SSH免秘钥登录</h2><p><strong>操作步骤：</strong></p>
+<ul>
+<li>cd ~ 回到根目录</li>
+<li>ssh-keygen -t rsa -C github注册邮箱   【这里的C是大写】</li>
+</ul>
+<p>​       <img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH.jpg" class title="生成秘钥"></p>
+<ul>
+<li><p>一路回车，检查在C盘下Admin下有一个.ssh文件夹 产生两个文件 一个带pub的是公钥  一个不带pub那个是私钥</p>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH02.jpg" class title="两个秘钥">
+</li>
+<li><p>在远程仓库保存公钥</p>
+<img src="/2020/08/20/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/SSH03.jpg" class title="保存钥匙">
+
+</li>
+</ul>
+<p><strong>那么再进行push或者其他需要登录的操作就都不需要登录了</strong></p>
+<pre><code>  &lt;!--hexoPostRenderEscape:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ssh-keygen -t rsa -C github注册邮箱   【这里的C是大写】#生成秘钥&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;:hexoPostRenderEscape--&gt;</code></pre>
+<p>​                </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E4%BA%A4%E4%BA%92/" rel="tag"># git本地库与远程库交互</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/20/git%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C/" rel="prev" title="git进阶操作">
+                  <i class="fa fa-chevron-left"></i> git进阶操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/20/git%E5%9C%A8Eclipse%E4%B8%AD%E7%9A%84%E6%8F%92%E4%BB%B6%E6%93%8D%E4%BD%9C/" rel="next" title="git在Eclipse中的插件操作">
+                  git在Eclipse中的插件操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小希希</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: location.pathname,
+    }, {"enable":true,"appId":"lghYz9hG5HnqKEUPx5q91zkr-gzGzoHsz","appKey":"jTr0bTOHq1DMGmFpuKkFcHzM","placeholder":"快来评论吧(*^▽^*)！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
