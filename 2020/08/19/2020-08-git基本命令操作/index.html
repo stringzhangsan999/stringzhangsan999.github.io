@@ -25,36 +25,38 @@
   <meta name="description" content="版本控制工具(linux命令在其中 git bash 同样适用 )">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git基本命令操作">
-<meta property="og:url" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:url" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="跑起来有风">
 <meta property="og:description" content="版本控制工具(linux命令在其中 git bash 同样适用 )">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/delete_reset.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file02.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file03.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file01.jpg">
-<meta property="og:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/delete_reset.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file03.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file01.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file02.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/sys_ignore.jpg">
+<meta property="og:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/pro_ignore.jpg">
 <meta property="article:published_time" content="2020-08-19T02:40:35.000Z">
-<meta property="article:modified_time" content="2020-08-20T01:21:31.671Z">
+<meta property="article:modified_time" content="2020-08-22T03:31:21.228Z">
 <meta property="article:author" content="小希希">
 <meta property="article:tag" content="git基本命令操作">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
+<meta name="twitter:image" content="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg">
 
 
-<link rel="canonical" href="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
+<link rel="canonical" href="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
 
 
 <script class="page-configurations">
@@ -194,7 +196,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">git基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">git初始化仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%9D%A5%E5%AD%98%E6%94%BE%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">用来存放数据的仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%93%E5%BA%93%E7%AD%BE%E5%90%8D"><span class="nav-number">1.2.</span> <span class="nav-text">设置仓库签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%93%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">查看仓库状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%9A%82%E5%AD%98%E5%8C%BA%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">在暂存区中添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E5%88%B0%E4%BB%93%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">提交文件到仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">更新文件内容文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">大致的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">1.7.1.</span> <span class="nav-text">reset 命令的三个参数的对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8E%E6%89%BE%E5%9B%9E"><span class="nav-number">1.8.</span> <span class="nav-text">删除文件后找回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%96%87%E4%BB%B6%E5%B7%AE%E5%BC%82"><span class="nav-number">1.9.</span> <span class="nav-text">比较文件差异</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">git基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">git初始化仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%9D%A5%E5%AD%98%E6%94%BE%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">用来存放数据的仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%93%E5%BA%93%E7%AD%BE%E5%90%8D"><span class="nav-number">1.2.</span> <span class="nav-text">设置仓库签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%93%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">查看仓库状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%9A%82%E5%AD%98%E5%8C%BA%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">在暂存区中添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E5%88%B0%E4%BB%93%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">提交文件到仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">更新文件内容文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">大致的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reset-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">1.7.1.</span> <span class="nav-text">reset 命令的三个参数的对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8E%E6%89%BE%E5%9B%9E"><span class="nav-number">1.8.</span> <span class="nav-text">删除文件后找回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%96%87%E4%BB%B6%E5%B7%AE%E5%BC%82"><span class="nav-number">1.9.</span> <span class="nav-text">比较文件差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BF%BD%E7%95%A5"><span class="nav-number">1.10.</span> <span class="nav-text">提交文件的忽略</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -209,20 +211,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -258,7 +260,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://47.111.239.85/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
+    <link itemprop="mainEntityOfPage" href="http://47.111.239.85/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/boniu.jpg">
@@ -291,7 +293,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-20 09:21:31" itemprop="dateModified" datetime="2020-08-20T09:21:31+08:00">2020-08-20</time>
+                <time title="修改时间：2020-08-22 11:31:21" itemprop="dateModified" datetime="2020-08-22T11:31:21+08:00">2020-08-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -312,8 +314,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -338,21 +340,21 @@
 <p><strong>形式：</strong> </p>
 <ul>
 <li>用户名： “tom”</li>
-<li>email :    “<a href="mailto:&#120;&#x78;&#120;&#120;&#x40;&#120;&#120;&#x2e;&#x63;&#x6f;&#109;">&#120;&#x78;&#120;&#120;&#x40;&#120;&#120;&#x2e;&#x63;&#x6f;&#109;</a>”</li>
+<li>email :    “<a href="mailto:&#120;&#x78;&#x78;&#120;&#x40;&#x78;&#120;&#46;&#99;&#x6f;&#x6d;">&#120;&#x78;&#x78;&#120;&#x40;&#x78;&#120;&#46;&#99;&#x6f;&#x6d;</a>”</li>
 </ul>
 <p><strong>级别：</strong></p>
 <ul>
 <li><p>项目级别（仓库级别）：仅仅在当前本地库范围内有效</p>
 <ul>
 <li>git config  user.name tom_pro</li>
-<li>git config  user.eamil  <a href="mailto:&#x78;&#x78;&#120;&#120;&#x78;&#x40;&#120;&#x78;&#x78;&#x2e;&#99;&#111;&#109;">&#x78;&#x78;&#120;&#120;&#x78;&#x40;&#120;&#x78;&#x78;&#x2e;&#99;&#111;&#109;</a></li>
+<li>git config  user.eamil  <a href="mailto:&#x78;&#x78;&#x78;&#120;&#120;&#x40;&#120;&#120;&#x78;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#x78;&#x78;&#120;&#120;&#x40;&#120;&#120;&#x78;&#x2e;&#x63;&#x6f;&#109;</a></li>
 </ul>
 </li>
 <li><p>系统用户级别： 登录当前操作系统的用户范围</p>
 <ul>
 <li><p>git config <strong>–global</strong>   user.name tom_pro</p>
 </li>
-<li><p>git config <strong>–global</strong>   user.eamil  <a href="mailto:&#120;&#120;&#120;&#120;&#120;&#x40;&#120;&#x78;&#120;&#46;&#99;&#111;&#x6d;">&#120;&#120;&#120;&#120;&#120;&#x40;&#120;&#x78;&#120;&#46;&#99;&#111;&#x6d;</a></p>
+<li><p>git config <strong>–global</strong>   user.eamil  <a href="mailto:&#120;&#120;&#120;&#120;&#x78;&#64;&#x78;&#120;&#120;&#46;&#99;&#x6f;&#109;">&#120;&#120;&#120;&#120;&#x78;&#64;&#x78;&#120;&#120;&#46;&#99;&#x6f;&#109;</a></p>
 </li>
 <li><p>就进原则：如果项目级别和系统用户级别都设置了有先使用项目级别，如果只设置了系统级别那么就用系统级别</p>
 </li>
@@ -368,7 +370,7 @@
 
 
 <p>这个是项目级别的：</p>
- <img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg" class title="查看项目级别签名">   
+ <img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/set_design.jpg" class title="查看项目级别签名">   
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .gitconfig# 查看全局配置文件里面的系统用户级别签名</span><br></pre></td></tr></table></figure>
 
@@ -377,18 +379,18 @@
 
 
 <p>这个是系统级别的：</p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg" class title="查看系统级别签名">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/global_design.jpg" class title="查看系统级别签名">
 
 <hr>
 <h2 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h2><p><code>git status #可以用来查看仓库中文件状态</code></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg" class title="查看仓库状态">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status.jpg" class title="查看仓库状态">
 
 <hr>
 <h2 id="在暂存区中添加文件"><a href="#在暂存区中添加文件" class="headerlink" title="在暂存区中添加文件"></a>在暂存区中添加文件</h2><p><strong>我们可以创建一个a.txt文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add a.txt #将a.txt文件添加到暂存区 但是只是放到了暂存区</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add a.txt #将a.txt文件添加到暂存区 但是只是放到了暂存区</span><br><span class="line">git add  --all #将添加所有文件到暂存区</span><br></pre></td></tr></table></figure>
 
 <p><strong>提交之后的状态使用git status查看</strong></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg" class title="添加文件后的状态">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_add01.jpg" class title="添加文件后的状态">
 
 
 
@@ -398,16 +400,16 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm  --cached a.txt</span><br></pre></td></tr></table></figure>
 
 <p><strong>撤销后查看状态</strong></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg" class title="撤销文件后的状态">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/git_status_rm01.jpg" class title="撤销文件后的状态">
 
 <hr>
 <h2 id="提交文件到仓库"><a href="#提交文件到仓库" class="headerlink" title="提交文件到仓库"></a>提交文件到仓库</h2><p>**注意：我们要提交一个文件前应该先添加到暂存区 **</p>
 <p><strong>注意：如果你没有描述文件信息message</strong> </p>
 <p>那 么会进入到vim编辑器里面 使用 <code>set nu</code>可以查看行号</p>
 <p>我们可以在第一行添加message 也可以直接wq退出 </p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg" class title="提交文件时出现vim编辑器">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/commit01.jpg" class title="提交文件时出现vim编辑器">
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit  [ -m &quot;message&quot;]  a.txt  #提交文件到仓库中</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit  [ -m &quot;message&quot;]  a.txt  #提交文件到仓库中</span><br><span class="line">git commit [ -m &quot;message&quot;] --all #提交缓存区所有文件到仓库中</span><br></pre></td></tr></table></figure>
 
 <p>再次查看状态可以发现提示信息显示没有可提交的文件</p>
 <hr>
@@ -416,19 +418,19 @@
 
 <p>  <strong>可以注意到我们可以下面提示我们可以add or commit 也就是我们可以直接提交，但是如果你直接commit修改的文件没有放到暂存区当你查看状态时会发现这个时候还是会有提示提示你！</strong></p>
 <p>  <strong>所以我们可以按照刚刚提交文件的方式先add再commit这样就不会提示你！</strong></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg" class title="提交修改后的文件">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/modified02.jpg" class title="提交修改后的文件">
 
 
 
 <hr>
-<h2 id="大致的流程"><a href="#大致的流程" class="headerlink" title="大致的流程"></a>大致的流程</h2><img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg" class title="流程图} --- ## 查看日志 &lt;figure class&#x3D;highlight plain&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;gutter&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;code&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;git log #查看日志会显示之前的操作和版本号,最完整 （空格翻页）&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --pretty&#x3D;oneline #日志按照一条一条显示，完整的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --oneline #显示部分的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git reflog #部分hashcode还包含HEAD@&amp;#123;恢复这个版本需要多少步&amp;#125;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt; {%asset_img log01.jpg git_log01} {%asset_img log02.jpg git_log02} {%asset_img log03.jpg git_log03} {%asset_img log04.jpg git_reflog} --- ## 版本前进后退 **本质：通过一个指针进行前进后退** **三种方式：** + 基于索引值操作【推荐】 ​ {%asset_img reset01.jpg 基于索引值">
+<h2 id="大致的流程"><a href="#大致的流程" class="headerlink" title="大致的流程"></a>大致的流程</h2><img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/process.jpg" class title="流程图} --- ## 查看日志 &lt;figure class&#x3D;highlight plain&gt;&lt;table&gt;&lt;tr&gt;&lt;td class&#x3D;gutter&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;1&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;2&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;3&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;4&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;td class&#x3D;code&gt;&lt;pre&gt;&lt;span class&#x3D;line&gt;git log #查看日志会显示之前的操作和版本号,最完整 （空格翻页）&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --pretty&#x3D;oneline #日志按照一条一条显示，完整的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git log --oneline #显示部分的hashcode&lt;&#x2F;span&gt;&lt;br&gt;&lt;span class&#x3D;line&gt;git reflog #部分hashcode还包含HEAD@&amp;#123;恢复这个版本需要多少步&amp;#125;&lt;&#x2F;span&gt;&lt;br&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&lt;&#x2F;figure&gt; {%asset_img log01.jpg git_log01} {%asset_img log02.jpg git_log02} {%asset_img log03.jpg git_log03} {%asset_img log04.jpg git_reflog} --- ## 版本前进后退 **本质：通过一个指针进行前进后退** **三种方式：** + 基于索引值操作【推荐】 ​ {%asset_img reset01.jpg 基于索引值">
 
 <ul>
 <li><p>使用^符号（只能后退不能前进）</p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于^">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于^">
 </li>
 <li><p>使用~符号（只能后退不能前进）</p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于~">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/reset02.jpg" class title="基于~">
 
 </li>
 </ul>
@@ -442,7 +444,7 @@
 <li>仅仅在本地库移动head指针</li>
 </ul>
 <p>实际上就是只有本地库改变了</p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg" class title="soft">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/soft.jpg" class title="soft">
 </li>
 <li><p>mixed参数（了解）</p>
 <ul>
@@ -450,7 +452,7 @@
 <li>重置缓存区</li>
 </ul>
 <p>本地库和暂存区都发生了改变</p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg" class title="mixed">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/mixed.jpg" class title="mixed">
 </li>
 <li><p>hard参数（常用的是hard）</p>
 <ul>
@@ -468,25 +470,49 @@
 
 
 <p><strong>找回文件（回退版本到没有删除的版本既可以找回文件,通过索引值找回）</strong></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/delete_reset.jpg" class title="查看版本">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/delete_reset.jpg" class title="查看版本">
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  reset --hard  部分hashcode(索引值) #回退版本</span><br></pre></td></tr></table></figure>
 
 
 
 <p><strong>如果我们已经rm 文件了工作区里面已经找不到这个文件了但是我们还没有add和提交delete操作</strong></p>
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file02.jpg" class title="没有添加删除操作">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file02.jpg" class title="没有添加删除操作">
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard  HEAD  #前面介绍hard会刷新暂存区和工作区 没有加^ 和~ 代表刷新当前版本</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file03.jpg" class title="刷新暂存区工作区">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/find_file03.jpg" class title="刷新暂存区工作区">
 
 <hr>
 <h2 id="比较文件差异"><a href="#比较文件差异" class="headerlink" title="比较文件差异"></a>比较文件差异</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff  文件名 #将工作区中的文件和暂存区进行比较 默认是比较上一个版本</span><br><span class="line">git diff [本地库中历史版本] 文件名 #将工作区中的文件和本地库历史进行比较</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file01.jpg" class title="比较上个版本文件">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file01.jpg" class title="比较上个版本文件">
 
-<img src="/2020/08/19/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file02.jpg" class title="比较指定版本文件">
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/diff_file02.jpg" class title="比较指定版本文件">
+
+<hr>
+<h2 id="提交文件的忽略"><a href="#提交文件的忽略" class="headerlink" title="提交文件的忽略"></a>提交文件的忽略</h2><p>​    <strong>描述当我们想要提交代码但是一部分代码我并不需要提交上去我们需要忽略一些不必要的文件</strong></p>
+<p>​    <strong>例如：我们在eclipse中提交文件时其实里面很多文件我们并不需要，里面包含了大量的eclipse项目部署的配置文件</strong></p>
+<p>忽略文件分为两种：</p>
+<ul>
+<li>系统级别忽略</li>
+</ul>
+<p>具体操作：在系统盘的用户目录下会有一个.gitconfig 我们只需要创建一个以.ignore指定结尾的文件进行配置</p>
+<p>内容如下 ：*代表所有字符0~多个通配符匹配 #表示注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># Compiled class file</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line"># Log file</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># BlueJ files</span><br><span class="line">*.ctxt</span><br><span class="line"></span><br><span class="line"># Mobile Tools for Java (J2ME)</span><br><span class="line">.mtj.tmp&#x2F;</span><br><span class="line"></span><br><span class="line"># Package Files #</span><br><span class="line">*.jar</span><br><span class="line">*.war</span><br><span class="line">*.nar</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line"></span><br><span class="line"># virtual machine crash logs, see http:&#x2F;&#x2F;www.java.com&#x2F;en&#x2F;download&#x2F;help&#x2F;error_hotspot.xml</span><br><span class="line">hs_err_pid*</span><br><span class="line"></span><br><span class="line">.classpath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">target </span><br></pre></td></tr></table></figure>
+
+<p>把上述文件的绝对路径赋值下来配置到下面里面去</p>
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/sys_ignore.jpg" class title="系统级别忽略文件">
+
+<ul>
+<li>项目级别忽略</li>
+</ul>
+<p>​      在.gti的本地仓库里面<font color="cornflowerblue">他们会默认识别下面.ignore文件</font>我们只需要在里面配置需要忽略的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">z321&#x2F;.deploy_git</span><br><span class="line">z321&#x2F;.gitignore</span><br><span class="line">z321&#x2F;node_modules</span><br><span class="line">z321&#x2F;public</span><br><span class="line">z321&#x2F;themes</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="/2020/08/19/2020-08-git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/pro_ignore.jpg" class title="项目级别忽略文件">
     </div>
 
     
